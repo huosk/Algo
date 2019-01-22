@@ -50,8 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestExpression.cs" />
+    <Compile Include="TestQueue.cs" />
     <Compile Include="TestStack.cs" />
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="TestLinkedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

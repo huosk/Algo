@@ -1,29 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿// <copyright file="LinkedList.cs" company="SKASK">
+// Copyright (c) SKASK. All rights reserved.
+// </copyright>
 
 namespace Algo.Collections
 {
-    //链表节点
-    public class LinkedNode<T>
-    {
-        public T item;
-        public LinkedNode<T> next;
-
-        public LinkedNode(T val)
-        {
-            item = val;
-        }
-    }
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
 
     public class LinkedList<T>
     {
+        // 头结点哨兵
+        private readonly LinkedNode<T> headGuard;
+        private int length;
+
+        public LinkedList()
+        {
+            this.headGuard = new LinkedNode<T>(default(T));
+        }
+
+        public LinkedList(IEnumerable<T> list)
+        {
+            this.headGuard = new LinkedNode<T>(default(T));
+            if (list != null)
+            {
+                var p = this.headGuard;
+                foreach (T item in list)
+                {
+                    p.Next = new LinkedNode<T>(item);
+                    p = p.Next;
+                    ++this.length;
+                }
+            }
+        }
+
         public int Length
         {
             get
             {
-                return length;
+                return this.length;
             }
         }
 
@@ -31,53 +47,33 @@ namespace Algo.Collections
         {
             get
             {
-                return headGuard.next;
-            }
-        }
-
-        //头结点哨兵
-        private LinkedNode<T> headGuard;
-        private int length;
-
-        public LinkedList()
-        {
-            headGuard = new LinkedNode<T>(default(T));
-        }
-
-        public LinkedList(IEnumerable<T> list)
-        {
-            headGuard = new LinkedNode<T>(default(T));
-            if (list != null)
-            {
-                var p = headGuard;
-                foreach (T item in list)
-                {
-                    p.next = new LinkedNode<T>(item);
-                    p = p.next;
-                    ++length;
-                }
+                return this.headGuard.Next;
             }
         }
 
         public LinkedNode<T> FindNode(Predicate<LinkedNode<T>> predicate)
         {
-            var p = headGuard.next;
+            var p = this.headGuard.Next;
             while (p != null && !predicate(p))
-                p = p.next;
+            {
+                p = p.Next;
+            }
 
             return p;
         }
 
         public LinkedNode<T> FindAt(int position)
         {
-            if (position < 0 || position > length)
+            if (position < 0 || position > this.length)
+            {
                 throw new IndexOutOfRangeException("position out of index");
+            }
 
-            var p = headGuard.next;
+            var p = this.headGuard.Next;
             int i = 0;
             while (p != null && i < position)
             {
-                p = p.next;
+                p = p.Next;
                 i++;
             }
 
@@ -87,66 +83,98 @@ namespace Algo.Collections
         public LinkedNode<T> InsertAfter(LinkedNode<T> node, T item)
         {
             if (node == null)
+            {
                 throw new ArgumentNullException("node is null");
+            }
 
-            var newNode = new LinkedNode<T>(item);
-            newNode.next = node.next;
-            node.next = newNode;
+            var newNode = new LinkedNode<T>(item)
+            {
+                Next = node.Next
+            };
+            node.Next = newNode;
 
-            length++;
+            this.length++;
 
             return newNode;
         }
 
         public LinkedNode<T> InsertAfter(int position, T item)
         {
-            if (position < 0 || position > length)
+            if (position < 0 || position > this.length)
+            {
                 throw new IndexOutOfRangeException("position out of index");
+            }
 
-            var prev = headGuard;
+            var prev = this.headGuard;
             int counter = 0;
             while (prev != null && counter < position)
             {
-                prev = prev.next;
+                prev = prev.Next;
                 counter++;
             }
 
             if (prev != null)
-                return InsertAfter(prev, item);
+            {
+                return this.InsertAfter(prev, item);
+            }
             else
+            {
                 return null;
+            }
         }
 
         public bool Remove(LinkedNode<T> node)
         {
-            //处理Null情况
+            // 处理Null情况
             if (node == null)
+            {
                 return false;
+            }
 
-            var p = headGuard;
-            while (p != null && p.next != node)
-                p = p.next;
+            var p = this.headGuard;
+            while (p != null && p.Next != node)
+            {
+                p = p.Next;
+            }
 
             if (p == null)
+            {
                 return false;
+            }
 
-            p.next = node.next;
-            node.next = null;
+            p.Next = node.Next;
+            node.Next = null;
 
-            length--;
+            this.length--;
 
             return true;
         }
 
         public LinkedNode<T> RemoveAt(int position)
         {
-            var node = FindAt(position);
+            var node = this.FindAt(position);
 
-            if (node != null && Remove(node))
+            if (node != null && this.Remove(node))
+            {
                 return node;
+            }
             else
+            {
                 return null;
+            }
+        }
+    }
+
+    // 链表节点
+    public class LinkedNode<T>
+    {
+        public LinkedNode(T val)
+        {
+            this.Item = val;
         }
 
+        public T Item { get; set; }
+
+        public LinkedNode<T> Next { get; set; }
     }
 }
