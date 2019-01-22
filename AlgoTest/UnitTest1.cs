@@ -28,6 +28,9 @@ namespace AlgoTest
             Assert.AreEqual(4, list.Length);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod]
         public void TestRemove()
         {
