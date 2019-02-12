@@ -163,6 +163,34 @@ namespace Algo.Collections
                 return null;
             }
         }
+
+        public void Reverse()
+        {
+            if (this.First != null)
+            {
+                this.ReverseHandler(this.First);
+            }
+        }
+
+        private LinkedNode<T> ReverseHandler(LinkedNode<T> head)
+        {
+            if (head == null)
+            {
+                return null;
+            }
+
+            if (head.Next == null)
+            {
+                this.headGuard.Next = head;
+            }
+            else
+            {
+                var remainHead = this.ReverseHandler(head.Next);
+                remainHead.Next = head;
+            }
+
+            return head;
+        }
     }
 
     // 链表节点

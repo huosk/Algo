@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\LinkedList.cs" />
+    <Compile Include="Sample\MaxSumArray\MaxSumArray.cs" />
     <Compile Include="Sample\Stack\Expression.cs" />
     <Compile Include="Collections\Stack.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -117,5 +117,20 @@ namespace AlgoTest
             Assert.AreEqual(0, list.Length);
             Assert.AreEqual(null, list.First);
         }
+
+        [TestMethod]
+        public void TestReverse()
+        {
+
+            int[] vals = new int[] { 1};
+            LinkedList<int> list = new LinkedList<int>(vals);
+            list.Reverse();
+
+            Assert.AreEqual(vals[vals.Length - 1], list.First.Item);
+            for (int i = 0; i < vals.Length; i++)
+            {
+                Assert.AreEqual(vals[vals.Length - 1 - i], list.FindAt(i).Item);
+            }
+        }
     }
 }
