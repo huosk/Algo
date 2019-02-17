@@ -11,7 +11,7 @@ namespace Algo.Collections
         {
             get
             {
-                return size;
+                return this.size;
             }
         }
 
@@ -23,53 +23,53 @@ namespace Algo.Collections
 
         public Stack(IEnumerable<T> vals)
         {
-            size = 0;
-            items = new T[defaultSize];
+            this.size = 0;
+            this.items = new T[this.defaultSize];
             if (vals != null)
             {
                 foreach (var item in vals)
                 {
-                    Push(item);
+                    this.Push(item);
                 }
             }
         }
 
         public bool IsEmpty()
         {
-            return size == 0;
+            return this.size == 0;
         }
 
         public void Push(T item)
         {
-            if (size == items.Length)
-                GrewCapacity();
-            items[size++] = item;
+            if (this.size == this.items.Length)
+                this.GrewCapacity();
+            this.items[this.size++] = item;
         }
 
         public T Pop()
         {
-            if (size == 0)
+            if (this.size == 0)
                 throw (new InvalidOperationException("stack under flow"));
 
-            var top = items[--size];
-            items[size] = default(T);
+            var top = this.items[--this.size];
+            this.items[this.size] = default(T);
             return top;
         }
 
         public T Peek()
         {
-            if (size == 0)
+            if (this.size == 0)
                 throw (new InvalidOperationException("peek item from empty stack"));
 
-            return items[size - 1];
+            return this.items[this.size - 1];
         }
 
         //扩容
         private void GrewCapacity()
         {
-            T[] newArray = new T[items.Length == 0 ? defaultSize : items.Length * 2];
-            Array.Copy(items, newArray, items.Length);
-            items = newArray;
+            T[] newArray = new T[this.items.Length == 0 ? this.defaultSize : this.items.Length * 2];
+            Array.Copy(this.items, newArray, this.items.Length);
+            this.items = newArray;
         }
     }
 }

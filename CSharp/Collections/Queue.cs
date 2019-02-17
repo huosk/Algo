@@ -1,7 +1,11 @@
-﻿using System;
+﻿// <copyright file="Queue.cs" company="SKASK">
+// Copyright (c) SKASK. All rights reserved.
+// </copyright>
 
 namespace Algo.Collections
 {
+    using System;
+
     public class Queue<T>
     {
         private T[] items;
@@ -12,46 +16,88 @@ namespace Algo.Collections
 
         public Queue()
         {
-            size = 0;
-            head = 0;
-            tail = 0;
-            items = new T[defaultSize];
+            this.size = 0;
+            this.head = 0;
+            this.tail = 0;
+            this.items = new T[this.defaultSize];
+        }
+
+        public Queue(System.Collections.Generic.IEnumerable<T> vals)
+        {
+            this.size = 0;
+            this.head = 0;
+            this.tail = 0;
+            this.items = new T[this.defaultSize];
+            foreach (var item in vals)
+            {
+                this.Enqueue(item);
+            }
+        }
+
+        public int Size
+        {
+            get
+            {
+                return this.size;
+            }
         }
 
         public void Enqueue(T item)
         {
-            if (size == items.Length)
-                GrewCapacity();
+            if (this.size == this.items.Length)
+            {
+                this.GrewCapacity();
+            }
 
-            items[tail] = item;
-            tail++;
-            size++;
+            this.items[this.tail] = item;
+            this.tail = (this.tail + 1) % this.items.Length;
+            this.size++;
         }
 
         public T Dequeue()
         {
-            if (size == 0)
+            if (this.size == 0)
+            {
                 throw new InvalidOperationException("Queue under flow");
-            var item = items[head];
-            items[head] = default(T);
-            head++;
-            size--;
+            }
+
+            var item = this.items[this.head];
+            this.items[this.head] = default(T);
+            this.head = (this.head + 1) % this.items.Length;
+            this.size--;
             return item;
         }
 
         public T Peek()
         {
-            if (size == 0)
+            if (this.size == 0)
+            {
                 throw new InvalidOperationException("Queue is empty");
-            return items[head];
+            }
+
+            return this.items[this.head];
         }
 
-        //扩容
+        // 扩容
         private void GrewCapacity()
         {
-            T[] newArray = new T[items.Length == 0 ? defaultSize : items.Length * 2];
-            Array.Copy(items, newArray, items.Length);
-            items = newArray;
+            T[] newArray = new T[this.items.Length == 0 ? this.defaultSize : this.items.Length * 2];
+            if (this.head < this.tail)
+            {
+                Array.Copy(this.items, newArray, this.items.Length);
+            }
+            else
+            {
+                for (int i = 0; i < this.items.Length; i++)
+                {
+                    newArray[i] = this.items[(this.head + i) % this.items.Length];
+                }
+            }
+
+            this.head = 0;
+            this.tail = this.items.Length;
+
+            this.items = newArray;
         }
     }
 }

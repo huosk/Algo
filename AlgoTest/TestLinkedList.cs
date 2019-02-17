@@ -5,7 +5,7 @@ using System;
 namespace AlgoTest
 {
     [TestClass]
-    public class LinkedListTest
+    public class TestLinkedList
     {
         [TestMethod]
         public void TestInsertAfter()
@@ -28,6 +28,9 @@ namespace AlgoTest
             Assert.AreEqual(4, list.Length);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         [TestMethod]
         public void TestRemove()
         {
@@ -73,9 +76,9 @@ namespace AlgoTest
             var node3 = list.FindAt(3);
             var node5 = list.FindAt(5);
             var node6 = list.FindAt(6);
-            Assert.AreEqual(1, node0.item);
-            Assert.AreEqual(5, node3.item);
-            Assert.AreEqual(8, node5.item);
+            Assert.AreEqual(1, node0.Item);
+            Assert.AreEqual(5, node3.Item);
+            Assert.AreEqual(8, node5.Item);
             Assert.AreEqual(null, node6);
         }
 
@@ -83,12 +86,12 @@ namespace AlgoTest
         public void TestFind()
         {
             LinkedList<int> list = new LinkedList<int>(new int[] { 1, 2, 3, 4, 5, 6 });
-            var node0 = list.FindNode((n) => n.item == 7);
+            var node0 = list.FindNode((n) => n.Item == 7);
             Assert.AreEqual(null, node0);
 
-            var node1 = list.FindNode((n) => n.item == 3);
+            var node1 = list.FindNode((n) => n.Item == 3);
             Assert.AreNotEqual(null, node1);
-            Assert.AreEqual(3, node1.item);
+            Assert.AreEqual(3, node1.Item);
         }
 
         [TestMethod]
@@ -96,7 +99,7 @@ namespace AlgoTest
         {
             LinkedList<int> list = new LinkedList<int>(new int[] { 1, 2, 3, 4, 5 });
             var ndoe = list.RemoveAt(2);
-            Assert.AreEqual(3, ndoe.item);
+            Assert.AreEqual(3, ndoe.Item);
             try
             {
                 list.RemoveAt(10);
@@ -113,6 +116,21 @@ namespace AlgoTest
 
             Assert.AreEqual(0, list.Length);
             Assert.AreEqual(null, list.First);
+        }
+
+        [TestMethod]
+        public void TestReverse()
+        {
+
+            int[] vals = new int[] { 1};
+            LinkedList<int> list = new LinkedList<int>(vals);
+            list.Reverse();
+
+            Assert.AreEqual(vals[vals.Length - 1], list.First.Item);
+            for (int i = 0; i < vals.Length; i++)
+            {
+                Assert.AreEqual(vals[vals.Length - 1 - i], list.FindAt(i).Item);
+            }
         }
     }
 }
