@@ -46,6 +46,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Collections\Queue.cs" />
     <Compile Include="Collections\SkipList.cs" />
+    <Compile Include="Collections\BinarySearchTree.cs" />
+    <Compile Include="Collections\RedBlackTree.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
