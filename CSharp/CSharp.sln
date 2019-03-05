@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp", "CSharp.csproj", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoTest", "..\AlgoTest\AlgoTest.csproj", "{FED9D72C-E20B-4AE1-AF5C-C3A996C18F0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MacTest", "MacTest\MacTest.csproj", "{D7DDB63B-EC37-4596-965B-9BED0F7BF8C6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{FED9D72C-E20B-4AE1-AF5C-C3A996C18F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FED9D72C-E20B-4AE1-AF5C-C3A996C18F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FED9D72C-E20B-4AE1-AF5C-C3A996C18F0B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7DDB63B-EC37-4596-965B-9BED0F7BF8C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7DDB63B-EC37-4596-965B-9BED0F7BF8C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7DDB63B-EC37-4596-965B-9BED0F7BF8C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7DDB63B-EC37-4596-965B-9BED0F7BF8C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

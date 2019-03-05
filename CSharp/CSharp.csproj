@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\HashMap.cs" />
     <Compile Include="Collections\LinkedList.cs" />
     <Compile Include="Sample\MaxSumArray\MaxSumArray.cs" />
     <Compile Include="Sample\Stack\Expression.cs" />

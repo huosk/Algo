@@ -99,7 +99,7 @@
         {
             Result left = new Result()
             {
-                Sum = int.MinValue,
+                Sum = mid > low ? int.MinValue : 0,
             };
             int sum = 0;
             for (int i = mid; i >= low; i--)
@@ -116,7 +116,7 @@
             sum = 0;
             Result right = new Result()
             {
-                Sum = int.MinValue
+                Sum = mid < high ? int.MinValue : 0
             };
             for (int i = mid + 1; i <= high; i++)
             {

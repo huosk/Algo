@@ -55,6 +55,7 @@
     <Compile Include="TestLinkedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFindMaxSubarray.cs" />
+    <Compile Include="TestSkipList.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
