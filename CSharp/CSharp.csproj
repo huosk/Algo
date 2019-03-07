@@ -49,6 +49,7 @@
     <Compile Include="Collections\SkipList.cs" />
     <Compile Include="Collections\BinarySearchTree.cs" />
     <Compile Include="Collections\RedBlackTree.cs" />
+    <Compile Include="Collections\Heap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
