@@ -16,14 +16,53 @@ namespace Algo.Collections
 
         public Heap(IEnumerable<T> collection, IComparer<T> comparer)
         {
+            this.comparer = comparer;
+            this.items = new T[10];
         }
 
+        public T Max
+        {
+            get
+            {
+                if (items.Length > 1 && items[1] != null)
+                {
+                    return items[1];
+                }
+
+                return default(T);
+            }
+        }
+
+        public void Insert(T item)
+        {
+            if (this.count == this.items.Length - 1)
+            {
+                // 堆满了，需要动态扩容
+                return;
+            }
+
+            // 插入到数组
+            this.items[++this.count] = item;
+
+            this.Swim(this.count);
+        }
+
+        public void RemoveMax()
+        {
+            if (count <= 0) return;
+
+            // 将堆顶元素交换到最后一个位置
+            items[1] = items[count];
+            items[count--] = default(T);
+
+            Sink(1);
+        }
 
         /// <summary>
         /// 自下而上进行上浮堆化
         /// </summary>
         /// <param name="i">其实索引</param>
-        public void Swim(int i)
+        private void Swim(int i)
         {
             while (i > 1 && this.comparer.Compare(this.items[i], this.items[i / 2]) > 0)
             {
@@ -39,7 +78,7 @@ namespace Algo.Collections
         /// 自上而下进行下沉堆化
         /// </summary>
         /// <param name="i">起始索引</param>
-        public void Sink(int i)
+        private void Sink(int i)
         {
             while (i * 2 <= this.count)
             {
@@ -60,62 +99,6 @@ namespace Algo.Collections
                 this.items[i] = temp;
 
                 i = maxChild;
-            }
-        }
-
-        public void Insert(T item)
-        {
-            if (this.count == this.items.Length - 1)
-            {
-                // 堆满了，需要动态扩容
-                return;
-            }
-
-            // 插入到数组
-            this.items[++this.count] = item;
-
-            int check = this.count;
-            int parent = check / 2;
-
-            // 存在父节点，并且比父节点大，则交换位置
-            while (parent > 0 && comparer.Compare(this.items[check], items[parent]) > 0)
-            {
-                T temp = items[parent];
-                items[parent] = items[check];
-                items[check] = temp;
-
-                check = parent;
-                parent = parent / 2;
-            }
-        }
-
-        public void RemoveMax()
-        {
-            if (count <= 0) return;
-
-            // 将堆顶元素交换到最后一个位置
-            items[1] = items[count];
-            items[count--] = default(T);
-
-            int index = 1;
-            while (index * 2 <= count)
-            {
-                // 找到左右子节点中较大的一个
-                int maxChild = index * 2;
-                if (maxChild + 1 <= count && comparer.Compare(items[maxChild], items[maxChild + 1]) < 0)
-                    maxChild++;
-
-                // 如果比较大的还大，说明已经堆化完毕
-                if (comparer.Compare(items[maxChild], items[index]) < 0)
-                    break;
-
-                // 如果比较大的小，交换元素
-                T temp = items[maxChild];
-                items[maxChild] = items[index];
-                items[index] = items[maxChild];
-
-                // 继续下沉
-                index = maxChild;
             }
         }
     }
