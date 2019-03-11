@@ -87,9 +87,6 @@ namespace AlgoTest
             list.Remove(5);
 
             Assert.AreEqual(4, list.First.item);
-            Assert.AreEqual(4, list.Head.GetForward(0).item);
-            Assert.AreEqual(4, list.Head.GetForward(1).item);
-            Assert.AreEqual(4, list.Head.GetForward(2).item);
         }
     }
 }

@@ -182,7 +182,7 @@ namespace Algo.Collections
                     SkipListNode forward = needUpdates[i].levels[i].forward;
                     if (forward.item.CompareTo(t) == 0)
                     {
-                        needUpdates[i].levels[i].forward = forward.levels[i].forward;
+                        needUpdates[i].levels[i].forward = forward.levels != null ? forward.levels[i].forward : null;
                     }
                 }
             }
@@ -237,6 +237,4 @@ namespace Algo.Collections
             public SkipListNode forward;
         }
     }
-
-
 }
